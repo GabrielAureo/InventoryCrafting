@@ -1,36 +1,38 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
-using System;
+using UnityEngine;
 
+[System.Serializable]
 public class Container{
-    public List<IContainable> items;
+    public List<Item> items;
 
-    public delegate void ItemAdditionHandler(IContainable item, int count);
-    public delegate int ItemRemovalHandler(string itemName, int count);
+    public delegate void ItemAdditionHandler(Item item, int count);
+    public delegate void ItemRemovalHandler(string itemName, int count);
 
     public event ItemAdditionHandler ItemAddition;
     public event ItemRemovalHandler ItemRemoval;
-    public Container(List<IContainable> items){
+    public Container(List<Item> items){
         this.items = items;
     }
+    public Container(params string[] items){
+        var list = Database.RequestItems(items).ToList();
+        this.items = list;
+    }
 
-    public void addItem(IContainable item, int count){
+    public void addItem(Item item, int count){
+        var itemClone = Object.Instantiate(item);
         for (int i =0; i < count; i++){
-            items.Add(item);
+            items.Add(itemClone);
         }
-        ItemAddition(item, count);
+        ItemAddition(itemClone, count);
     }
 
     public int removeItem(string itemName, int count){
-        /*var result = items.Where(x => x.name.Equals(itemName, StringComparison.CurrentCultureIgnoreCase));
-        var removeCount = Math.Min(result.Count(), count);
-        items = items.Except(result).ToList();*/
-
         int removeCount = 0;
 
         foreach(var item in items){
-            if(item.getID().Equals(itemName, StringComparison.CurrentCultureIgnoreCase)){
+            if(item.getID().Equals(itemName, System.StringComparison.CurrentCultureIgnoreCase)){
                 items.Remove(item);
                 removeCount++;
             }
@@ -42,22 +44,5 @@ public class Container{
         
     }
 
-    public FilteredList<E> filterByType<E>() where E: IContainable{
-        return new FilteredList<E>(items.OfType<E>().ToList());
-    }
 
-
-}
-
-public class FilteredList<T>{
-    private List<T> list;
-    public bool isDirty;
-
-    public FilteredList(List<T> list, bool isDirty = false){
-        this.list = list;
-        this.isDirty = isDirty;
-    }
-
-
-    
 }

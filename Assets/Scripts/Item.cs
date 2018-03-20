@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Linq;
 public abstract class Item: ScriptableObject, IContainable{
+    [SerializeField]
     private string idName;
     public string displayName;
     public Sprite icon;
     public float value;
-
     public float weight;
 
     public string getID(){

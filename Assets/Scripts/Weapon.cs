@@ -1,8 +1,8 @@
 using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Weapon")]
 public class Weapon: Item, ICraftable {
+    [SerializeField]
     Item[] recipe;
-    public string description;
     [SerializeField]
     private float baseDamage;
     [HideInInspector]

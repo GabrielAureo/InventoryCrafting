@@ -31,13 +31,11 @@ public class InventoryDisplay: MonoBehaviour{
         }
     }
 
-    private void addItem(IContainable item, int count){
+    private void addItem(Item item, int count){
         
-
     }
 
-    private int removeItem(string name, int count){
-        return 1;
+    private void removeItem(string name, int count){
 
     }
 
