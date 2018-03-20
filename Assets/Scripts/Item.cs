@@ -11,6 +11,9 @@ public abstract class Item: ScriptableObject, IContainable{
     public string getID(){
         return idName;
     }
+    public virtual string getDisplayName(){
+        return displayName;
+    }
 
    
 

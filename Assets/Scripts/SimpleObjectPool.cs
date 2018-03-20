@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 // A very simple object pooling class
-public abstract class SimpleObjectPool
+public class SimpleObjectPool
 {
     // the prefab that this object pool returns instances of
     private GameObject prefab;
