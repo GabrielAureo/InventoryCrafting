@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "displayName": "Gray Sword of Bane",
+      "icon": {
+        "id": "ironsword"
+      },
+      "value": 0.0,
+      "weight": 0.0,
+      "name": "Iron Sword",
+      "hideFlags": 0
+    },
+    {
+      "displayName": "Baseball Bat",
+      "icon": {
+        "id": "baseballbat"
+      },
+      "value": 0.0,
+      "weight": 0.0,
+      "name": "Baseball Bat",
+      "hideFlags": 0
+    },
+    {
+      "displayName": "Banana",
+      "icon": {
+        "id": ""
+      },
+      "value": 544.0,
+      "weight": 2.0,
+      "name": "Banana",
+      "hideFlags": 0
+    },
+    {
+      "displayName": "Orange",
+      "icon": {
+        "id": ""
+      },
+      "value": 100.0,
+      "weight": 5.0,
+      "name": "Orange",
+      "hideFlags": 0
+    },
+    {
+      "displayName": "Gray Sword of Bane",
+      "icon": {
+        "id": "ironsword"
+      },
+      "value": 0.0,
+      "weight": 0.0,
+      "name": "Iron Sword",
+      "hideFlags": 0
+    },
+    {
+      "displayName": "Flamberge",
+      "icon": {
+        "id": "flamberge"
+      },
+      "value": 0.0,
+      "weight": 0.0,
+      "name": "Flamberge",
+      "hideFlags": 0
+    }
+  ]
+}

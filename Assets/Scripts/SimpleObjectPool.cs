@@ -47,6 +47,34 @@ public class SimpleObjectPool
         // return a reference to the instance
         return spawnedGameObject;
     }
+
+    public GameObject GetObject(Transform parent, bool scaling) 
+    {
+        GameObject spawnedGameObject;
+        
+        // if there is an inactive instance of the prefab ready to return, return that
+        if (inactiveInstances.Count > 0) 
+        {
+            // remove the instance from teh collection of inactive instances
+            spawnedGameObject = inactiveInstances.Pop();
+        }
+        // otherwise, create a new instance
+        else 
+        {
+            spawnedGameObject = (GameObject)GameObject.Instantiate(prefab);
+            
+            // add the PooledObject component to the prefab so we know it came from this pool
+            PooledObject pooledObject = spawnedGameObject.AddComponent<PooledObject>();
+            pooledObject.pool = this;
+        }
+        
+        // put the instance in the root of the scene and enable it
+        spawnedGameObject.transform.SetParent(parent, scaling);
+        spawnedGameObject.SetActive(true);
+        
+        // return a reference to the instance
+        return spawnedGameObject;
+    }
     
     // Return an instance of the prefab to the pool
     public void ReturnObject(GameObject toReturn) 

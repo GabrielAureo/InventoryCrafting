@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class Container{
@@ -12,16 +13,18 @@ public class Container{
 
     public event ItemAdditionHandler ItemAddition;
     public event ItemRemovalHandler ItemRemoval;
+
+    [JsonConstructor()]
     public Container(List<Item> items){
         this.items = items;
     }
     public Container(params string[] items){
-        var list = Database.RequestItems(items).ToList();
+        var list = DatabaseManager.itemsData.data.RequestMany(items, () => ScriptableObject.CreateInstance<Item>());
         this.items = list;
     }
 
     public void addItem(Item item, int count){
-        var itemClone = Object.Instantiate(item);
+        var itemClone = item;
         for (int i =0; i < count; i++){
             items.Add(itemClone);
         }

@@ -1,16 +1,57 @@
 using UnityEngine;
-public class MenuListItem : MonoBehaviour{
-    private GameObject itemMenuInstance;
-    private IContainable item;
+using TMPro;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
+public class MenuListItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler{
+    [SerializeField]
+    ItemDetailsView displayView;
+    [SerializeField]
+    private TextMeshProUGUI itemName;
+    [SerializeField]
+    private TextMeshProUGUI value;
+    [SerializeField]
+    private TextMeshProUGUI weight;
+
+    private Item item;
+
+    MenuListItemEvents events;
+
+
+	public void Initialize(ref Item item, MenuListItemEvents events){
+		this.events = events;
+		setItem(ref item);
+        item.onNameChange += ReloadView;
+
+	}
 
     
-    public void shouldFilter(string query){
-        itemMenuInstance.SetActive(query != string.Empty && item.getDisplayName().Contains(query));
-        
+    public void setItem(ref Item item){
+        this.item = item;
+        ReloadView();
     }
 
-    public void setIndex(int index){
-        itemMenuInstance.transform.SetSiblingIndex(index);
+    private void ReloadView(){
+        itemName.text = item.getDisplayName();
+        value.text = item.value.ToString();
+        weight.text = item.weight.ToString();
     }
 
+    public void renameItem(string newName){
+        item.displayName = newName;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+		if(eventData.button == PointerEventData.InputButton.Left){
+			events.onLeftClick(item);
+        }else if(eventData.button == PointerEventData.InputButton.Right){
+			events.onRightClick(item);
+		}
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        events.onHoverEnter(item);
+    }
 }

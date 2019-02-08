@@ -1,12 +1,18 @@
 using UnityEngine;
-using System.Linq;
-public abstract class Item: ScriptableObject, IContainable{
-    [SerializeField]
-    private string idName;
-    public string displayName;
-    public Sprite icon;
-    public float value;
-    public float weight;
+using System;
+using UnityEngine.Events;
+
+[CreateAssetMenu(menuName = "Item/Item")]
+[Serializable]
+public class Item : ScriptableObject, IContainable{
+    string idName;
+    public string displayName = "";
+    public ItemSprite icon;
+    public float value = 0.0f;
+    public float weight = 0.0f;
+
+    [NonSerialized]
+    public UnityAction onNameChange;
 
     public string getID(){
         return idName;
@@ -14,8 +20,10 @@ public abstract class Item: ScriptableObject, IContainable{
     public virtual string getDisplayName(){
         return displayName;
     }
-
-   
-
+    public void changeDisplayName(string newName){
+        displayName = newName;
+        onNameChange();
+    }
 
 }
+

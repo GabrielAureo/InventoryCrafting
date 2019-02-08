@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/* /*/using System.Collections.Generic;
 using System.Linq;
 public interface TabFilter<out T> where T: IContainable{
 
@@ -30,5 +30,3 @@ public class WeaponTab : TabFilter<Weapon>
         return new string[]{"name", "damage", "type", "weight", "value"};
     }
 }
-
-

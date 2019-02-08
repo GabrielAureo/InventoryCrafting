@@ -2,15 +2,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Weapon")]
 public class Weapon: Item, ICraftable {
     [SerializeField]
-    Item[] recipe;
+    private Item[] recipe;
     [SerializeField]
-    private float baseDamage;
-    [HideInInspector]
-    private float addDamage;
+    private float damage;
 
 
     public float getDamage(){
-        return addDamage + baseDamage;
+        return damage;
     }
 
     public Item[] getRecipe()
@@ -19,7 +17,7 @@ public class Weapon: Item, ICraftable {
     }
 
     public void increaseDamage(float amount){
-        addDamage += amount;
+        damage += amount;
     
     }
 
